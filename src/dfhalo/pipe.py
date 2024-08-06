@@ -24,7 +24,7 @@ def eval_halo_pipe(field,
                    thresholds=np.logspace(-0.3,-3.3,22),
                    mag_range=[8.5,10.5],
                    pixel_scale=2.5,
-                   do_clustering=True,
+                   do_clustering=False,
                    eps_grid=np.arange(0.1,0.3,0.02),
                    threshold_range=[0.02,0.5],
                    threshold_norm=None,
@@ -35,8 +35,8 @@ def eval_halo_pipe(field,
                    ZP_keyword='REFZP',
                    atlas_dir='./',
                    save_dir='.',
-                   verbose=True,
-                   plot=True):
+                   verbose=False,
+                   plot=False):
     
     """
     Evaluate bright stellar halos.
@@ -211,7 +211,7 @@ def eval_halo_pipe(field,
     
     # Append comments to the table
     str_contrs_range = ", ".join(map(str, fit_contrast_range))
-    comments = ["flags: 1: good. 0: bad profule measurement.",
+    comments = ["flags: 1: good. 0: bad profile measurement.",
                 "slope measured between contrast [{:}].".format(str_contrs_range),
                 "label: DBSCAN clustering labels. -1: bad/outlier. 99: no clustering."]
     table.meta['comments'] = comments
@@ -234,7 +234,7 @@ def extract_profile_pipe(hdu_list, segm_list,
                          N_source_min=500,
                          dist_mask_min=None,
                          ZP_keyword='REFZP',
-                         plot=True, verbose=True):
+                         plot=False, verbose=False):
     
     """ 
     Extract radii-threshold profile in the list of frames.
